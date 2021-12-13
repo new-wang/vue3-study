@@ -3,13 +3,19 @@
   <button @click="count++">count is: {{ count }}</button>
   <p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p>
 
-   <ModelButton></ModelButton>  
+  <!-- teleport -->
+  <ModelButton></ModelButton>
 
+  <!-- Emits选项 -->
+  <!-- <Emits @click="onClick"></Emits> -->
+  <Emits @my-click="onClick"></Emits>
 
 </template>
 
 <script>
 import ModelButton from "./ModelButton.vue"
+import Emits from "./Emits.vue"
+
 
 export default {
   name: 'HelloWorld',
@@ -17,11 +23,21 @@ export default {
     msg: String
   },
   components:{
-    ModelButton
+    ModelButton,
+    Emits
   },
   data() {
     return {
       count: 0
+    }
+  },
+  methods: {
+    onClick(){
+      // 如果Emits中不加emits 原生事件干扰会执行两次
+      
+      
+      console.log('click me')
+
     }
   }
 }
