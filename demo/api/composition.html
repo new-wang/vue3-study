@@ -17,6 +17,11 @@
             reactive,
             computed,
             watchEffect,
+            ref,
+            toRefs,
+            onMounted,
+            onUnmounted,
+            watch
         } = Vue
 
         console.log('Vue',Vue)
@@ -25,10 +30,14 @@
                 <button @click="click">
                 {{ state.message }}
                 </button>
+
+                <p> counter: {{counter}} </p>
+                <p> doubleCounter: {{doubleCounter}} </p>
+                <p ref="desc"></p>
             `,
             setup() {
                 const state = reactive({
-                    message:'Hello Vue 3!!'
+                    message:'Hello Vue 3!!',
                 })
                 watchEffect(() => {
                     console.log('state change ', state.message)
@@ -36,9 +45,31 @@
                 function click() {
                     state.message = state.message.split('').reverse().join('')
                 }
+
+
+                let timer
+                const counterState = reactive({
+                    counter:1,
+                    doubleCounter: computed(() => counterState.counter * 2)
+                })
+                onMounted(()=>{
+                    timer = setInterval(() => {
+                        counterState.counter++
+                    }, 1000);
+                })
+                onUnmounted(() => {
+                    clearInterval(timer)
+                })
+                const desc = ref(null)
+                watch(()=>counterState.counter, (val,oldVal)=>{
+                    desc.value.textContent = `counter change from ${oldVal} to ${val}`
+                })
+
                 return {
                     state,
-                    click
+                    click,
+                    desc,
+                    ...toRefs(counterState)
                 }
             }
         }
