@@ -15,13 +15,16 @@
   <VmodelTest v-model:counter = "count"></VmodelTest>
   <!-- 等效于 -->
   <!-- <VmodelTest :counter = "count" @update:counter = "count = $event"></VmodelTest> -->
+
+  <Functional level="3">函数式组件：这是一个h3</Functional>
+
 </template>
 
 <script>
 import ModelButton from "./ModelButton.vue"
 import Emits from "./Emits.vue"
 import VmodelTest from "./VmodelTest.vue"
-
+import Functional from './functional'
 export default {
   name: 'HelloWorld',
   props: {
@@ -30,7 +33,8 @@ export default {
   components:{
     ModelButton,
     Emits,
-    VmodelTest
+    VmodelTest,
+    Functional
   },
   data() {
     return {
