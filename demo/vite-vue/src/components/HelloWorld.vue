@@ -10,12 +10,17 @@
   <!-- <Emits @click="onClick"></Emits> -->
   <Emits @my-click="onClick"></Emits>
 
+  <!-- v-model的使用 -->
+  <!-- <VmodelTest v-model = "count"></VmodelTest> -->
+  <VmodelTest v-model:counter = "count"></VmodelTest>
+  <!-- 等效于 -->
+  <!-- <VmodelTest :counter = "count" @update:counter = "count = $event"></VmodelTest> -->
 </template>
 
 <script>
 import ModelButton from "./ModelButton.vue"
 import Emits from "./Emits.vue"
-
+import VmodelTest from "./VmodelTest.vue"
 
 export default {
   name: 'HelloWorld',
@@ -24,7 +29,8 @@ export default {
   },
   components:{
     ModelButton,
-    Emits
+    Emits,
+    VmodelTest
   },
   data() {
     return {
