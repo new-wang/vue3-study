@@ -3,7 +3,7 @@
         update:modelValue:{{modelValue}}
     </div> -->
     <div @click="$emit('update:counter',counter + 1)">
-        update:counter:{{counter}}
+        vModel:update:counter:{{counter}}
     </div>
 </template>
 <script>

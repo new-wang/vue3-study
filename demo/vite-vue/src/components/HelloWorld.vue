@@ -12,11 +12,16 @@
 
   <!-- v-model的使用 -->
   <!-- <VmodelTest v-model = "count"></VmodelTest> -->
+  <!-- <VmodelTest :modelValue="count" @update:modelValue="count=$event"></VmodelTest>   -->
+
   <VmodelTest v-model:counter = "count"></VmodelTest>
   <!-- 等效于 -->
   <!-- <VmodelTest :counter = "count" @update:counter = "count = $event"></VmodelTest> -->
 
   <Functional level="3">函数式组件：这是一个h3</Functional>
+
+  <!-- 异步组件 -->
+  <AsyncComp></AsyncComp>
 
 </template>
 
@@ -25,6 +30,7 @@ import ModelButton from "./ModelButton.vue"
 import Emits from "./Emits.vue"
 import VmodelTest from "./VmodelTest.vue"
 import Functional from './functional'
+import { defineAsyncComponent } from "vue"
 export default {
   name: 'HelloWorld',
   props: {
@@ -34,7 +40,9 @@ export default {
     ModelButton,
     Emits,
     VmodelTest,
-    Functional
+    Functional,
+    // AsyncComp:()=>import('./other.vue')
+    AsyncComp:defineAsyncComponent(()=>import('./other.vue'))
   },
   data() {
     return {
