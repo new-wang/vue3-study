@@ -5,7 +5,13 @@ import App from './App.vue'
 import './index.css'
 import CanvasApp from './CanvasApp.vue'
 
-createApp(App).mount("#app")
+createApp(App)
+.directive('highlight',{
+  beforeMount(el, binding, vnode) {
+    el.style.background = binding.value
+  }
+})
+.mount("#app")
 
 const nodeOps = {
     insert: (child, parent, anchor) => {

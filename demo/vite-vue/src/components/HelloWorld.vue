@@ -35,6 +35,9 @@
 
   <!-- 异步组件 -->
   <AsyncComp></AsyncComp>
+
+  <!-- 自定义指令 -->
+  <p v-highlight="'green'">自定义指令</p>
 </template>
 
 <script>
