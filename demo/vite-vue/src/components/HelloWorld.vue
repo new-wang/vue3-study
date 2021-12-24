@@ -1,7 +1,9 @@
 <template>
   <h1>{{ msg }}</h1>
   <button @click="count++">count is: {{ count }}</button>
-  <p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p>
+  <p>
+    Edit <code>components/HelloWorld.vue</code> to test hot module replacement.
+  </p>
 
   <!-- teleport -->
   <ModelButton></ModelButton>
@@ -14,49 +16,93 @@
   <!-- <VmodelTest v-model = "count"></VmodelTest> -->
   <!-- <VmodelTest :modelValue="count" @update:modelValue="count=$event"></VmodelTest>   -->
 
-  <VmodelTest v-model:counter = "count"></VmodelTest>
+  <VmodelTest v-model:counter="count"></VmodelTest>
   <!-- 等效于 -->
   <!-- <VmodelTest :counter = "count" @update:counter = "count = $event"></VmodelTest> -->
 
+  <!-- render api变化 -->
+  <RenderTest v-model:counter="count">
+    <template v-slot:default>
+      <p>Render 默认插槽</p>
+    </template>
+    <template v-slot:content>
+      <p> Render content 具名插槽</p>
+    </template>
+  </RenderTest>
+
+  <!-- 函数式组件 -->
   <Functional level="3">函数式组件：这是一个h3</Functional>
 
   <!-- 异步组件 -->
   <AsyncComp></AsyncComp>
-
 </template>
 
 <script>
-import ModelButton from "./ModelButton.vue"
-import Emits from "./Emits.vue"
-import VmodelTest from "./VmodelTest.vue"
-import Functional from './functional'
-import { defineAsyncComponent } from "vue"
+import ModelButton from "./ModelButton.vue";
+import Emits from "./Emits.vue";
+import VmodelTest from "./VmodelTest.vue";
+// import RenderTest from './functional'
+import Functional from "./functional";
+import { defineAsyncComponent, h } from "vue";
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
-  components:{
+  components: {
     ModelButton,
     Emits,
     VmodelTest,
+    RenderTest: {
+      props:{
+        counter:{
+          type:Number,
+          default:0
+        }
+      },
+      methods: {
+        onClick(){
+          this.$emit('update:counter', this.counter +1 )
+        }
+      },
+      render() {
+        // 获取插槽
+        // 2.x this.$scopedSlots.content()
+        // this.$slots.default()
+        // console.log(this.$slots.content())
+        const emit = this.$emit
+        return h("div", [
+          h(
+            "div",{},
+            `i am renderTest, ${this.counter}`,
+            this.$slots.default(),
+            this.$slots.content()
+          ),
+          h(
+            "button",
+            {
+              onClick:this.onClick,
+            },
+            "buty it!"
+          ),
+        ]);
+      },
+    },
     Functional,
     // AsyncComp:()=>import('./other.vue')
-    AsyncComp:defineAsyncComponent(()=>import('./other.vue'))
+    AsyncComp: defineAsyncComponent(() => import("./other.vue")),
   },
   data() {
     return {
-      count: 0
-    }
+      count: 0,
+    };
   },
   methods: {
-    onClick(){
+    onClick() {
       // 如果Emits中不加emits 原生事件干扰会执行两次
-      
-      
-      console.log('click me')
 
-    }
-  }
-}
+      console.log("click me");
+    },
+  },
+};
 </script>
