@@ -38,15 +38,33 @@
 
   <!-- 自定义指令 -->
   <p v-highlight="'green'">自定义指令</p>
+
+  <!-- 过渡 -->
+  <TransitionTest></TransitionTest>
+
+  <!-- $on，$off 和 $once：事件派发和监听 -->
+  <button @click="sendMsg"> emit event </button>
+
+
 </template>
 
 <script>
+import { defineAsyncComponent, h } from "vue";
+
 import ModelButton from "./ModelButton.vue";
 import Emits from "./Emits.vue";
 import VmodelTest from "./VmodelTest.vue";
 // import RenderTest from './functional'
 import Functional from "./functional";
-import { defineAsyncComponent, h } from "vue";
+import TransitionTest from "./TransitionTest.vue";
+
+// 事件派发和监听
+import mitt from 'mitt'
+
+// 创建emitter
+export const emitter = mitt()
+
+
 export default {
   name: "HelloWorld",
   props: {
@@ -94,6 +112,7 @@ export default {
     Functional,
     // AsyncComp:()=>import('./other.vue')
     AsyncComp: defineAsyncComponent(() => import("./other.vue")),
+    TransitionTest
   },
   data() {
     return {
@@ -106,6 +125,10 @@ export default {
 
       console.log("click me");
     },
-  },
+    sendMsg(){
+      // 派发事件 在 other.vue中监听
+        emitter.emit('someEvent','foo ')
+    }
+  }
 };
 </script>
