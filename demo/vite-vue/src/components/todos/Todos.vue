@@ -27,23 +27,7 @@
     </ul>
 
     <!-- 过滤 -->
-    <p class="filters">
-      <span
-        @click="visibility = 'all'"
-        :class="{ selected: visibility === 'all' }"
-        >All</span
-      >
-      <span
-        @click="visibility = 'active'"
-        :class="{ selected: visibility === 'active' }"
-        >Active</span
-      >
-      <span
-        @click="visibility = 'completed'"
-        :class="{ selected: visibility === 'completed' }"
-        >Completed</span
-      >
-    </p>
+    <Filter :items = "filterItems" v-model="visibility"></Filter>
   </div>
 </template>
 
@@ -51,6 +35,7 @@
 import { reactive, toRefs, computed, watchEffect } from "vue";
 
 import TodoItem from './TodoItem.vue'
+import Filter from './Filter.vue'
 
 const filters = {
   all(todos) {
@@ -81,12 +66,27 @@ const todoStorage = {
 export default {
   components: {
     TodoItem,
+    Filter
   },
   setup() {
     const state = reactive({
       newTodo: "",
       todos: todoStorage.fetch(),
       editedTodo: null, //正在编辑的todo
+      filterItems:[
+        {
+          label:"All",
+          value:'all'
+        },
+        {
+          label:"Active",
+          value:'active'
+        },
+        {
+          label:"Completed",
+          value:'completed'
+        }
+      ],
       visibility: "all",
       filterdTodos: computed(() => {
         return filters[state.visibility](state.todos);
@@ -120,12 +120,5 @@ export default {
 </script>
 
 <style>
-.filters > span {
-  padding: 2px 4px;
-  margin-right: 4px;
-  border: 1px solid transparent;
-}
-.filters > span.selected {
-  border-color: rgba(173, 47, 47, 0.2);
-}
+
 </style>
