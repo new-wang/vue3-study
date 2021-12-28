@@ -5,12 +5,16 @@ import App from './App.vue'
 import './index.css'
 import CanvasApp from './CanvasApp.vue'
 
+import EditTodo from './components/todos/EditTodo.vue'
+
+
 createApp(App)
 .directive('highlight',{
   beforeMount(el, binding, vnode) {
     el.style.background = binding.value
   }
 })
+.component('EditTodo',EditTodo)
 .mount("#app")
 
 const nodeOps = {
