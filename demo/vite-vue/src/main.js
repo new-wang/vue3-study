@@ -1,31 +1,12 @@
 import { createApp } from 'vue'
 // import { createRenderer } from '@vue/runtime-core'
 
-import { createRouter, createWebHashHistory } from 'vue-router'
-
 import App from './App.vue'
 import './index.css'
 // import CanvasApp from './CanvasApp.vue'
 
 import EditTodo from './components/todos/EditTodo.vue'
-
-import Dashboard from './components/Dashboard.vue'
-import Todos from './components/todos/Todos.vue'
-
-
-const router = createRouter({
-  history: createWebHashHistory(),
-  routes: [
-    {
-      path: '/',
-      component: Dashboard
-    },
-    {
-      path: '/todos',
-      component: Todos
-    }
-  ]
-})
+import router from './router/router.js'
 
 createApp(App)
   .directive('highlight', {
