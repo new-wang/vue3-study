@@ -7,6 +7,7 @@ import './index.css'
 
 import EditTodo from './components/todos/EditTodo.vue'
 import router from './router/router.js'
+import store from './store/store'
 
 createApp(App)
   .directive('highlight', {
@@ -16,6 +17,7 @@ createApp(App)
   })
   .component('EditTodo', EditTodo)
   .use(router)
+  .use(store)
   .mount("#app")
 
 // const nodeOps = {

@@ -1,5 +1,16 @@
 <template>
   <div>
+    <!-- 传统写法 -->
+    <p @click="$store.commit('add')">
+      store.state.count：{{ $store.state.count }}
+    </p>
+
+    <!-- commposition写法 -->
+    <p @click="add">{{state.count}}</p>
+
+    <!-- toRefs -->
+    <p @click="add">{{count}}</p>
+
     <ul>
       <li>
         <!-- <router-link to = "/" >dashboard</router-link> -->
@@ -18,11 +29,24 @@
 </template>
 
 <script>
+import { toRefs } from '@vue/reactivity';
+import { useStore } from "vuex";
 import NavLink from "./NavLink.vue";
 export default {
-    components: {
-        NavLink
-    },
+  components: {
+    NavLink,
+  },
+  setup() {
+    const store = useStore();
+    console.log(store);
+    return {
+      state: store.state,
+      ...toRefs(store.state),
+      add() {
+        store.commit("add");
+      },
+    };
+  },
 };
 </script>
 
