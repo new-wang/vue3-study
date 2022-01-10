@@ -1,15 +1,15 @@
 <template>
   <div>
     <!-- 传统写法 -->
-    <p @click="$store.commit('add')">
+    <p :class="$style['click-count']" @click="$store.commit('add')">
       store.state.count：{{ $store.state.count }}
     </p>
 
     <!-- commposition写法 -->
-    <p @click="add">{{state.count}}</p>
+    <p :class="$style['click-count']" @click="add">{{state.count}}</p>
 
     <!-- toRefs -->
-    <p @click="add">{{count}}</p>
+    <p :class="$style['click-count']" @click="add">{{count}}</p>
 
     <ul>
       <li>
@@ -50,5 +50,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style module>
+.click-count{
+  background-color: salmon;
+}
+
 </style>
