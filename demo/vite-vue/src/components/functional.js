@@ -1,9 +1,9 @@
-import { h } from 'vue'
+import { h } from "vue";
 
 const Heading = (props, context) => {
-  return h(`h${props.level}`, context.attrs, context.slots)
-}
+    return h(`h${props.level}`, context.attrs, context.slots);
+};
 
-Heading.props = ['level']
+Heading.props = ["level"];
 
-export default Heading
+export default Heading;

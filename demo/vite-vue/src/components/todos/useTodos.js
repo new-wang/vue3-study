@@ -11,17 +11,17 @@ const todoStorage = {
     },
     save(todos) {
         localStorage.setItem("vue3-todos", JSON.stringify(todos));
-    },
+    }
 };
 //   todos: todoStorage.fetch()
 export function useTodos(state) {
-    const todos = ref(todoStorage.fetch())
+    const todos = ref(todoStorage.fetch());
 
     function addTodo() {
         todos.value.push({
             id: todos.value.length + 1,
             title: state.newTodo,
-            completed: false,
+            completed: false
         });
         state.newTodo = "";
     }
@@ -34,5 +34,5 @@ export function useTodos(state) {
         todoStorage.save(todos.value);
     });
 
-    return { todos, removeTodo, addTodo }
+    return { todos, removeTodo, addTodo };
 }

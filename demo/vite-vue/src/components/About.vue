@@ -1,7 +1,7 @@
 <template>
-  <div>
-      about page
-      <router-view></router-view>
+    <div>
+        about page
+        <router-view></router-view>
     </div>
 </template>
 
@@ -9,5 +9,4 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

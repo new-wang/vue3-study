@@ -1,9 +1,9 @@
 <template>
     <input
-      type="text"
-      :value="todoTitle"
-      @input = "onInputChange"
-      v-bind="$attrs"
+        type="text"
+        :value="todoTitle"
+        @input="onInputChange"
+        v-bind="$attrs"
     />
     <!-- 非属性特性展开 -->
 </template>
@@ -15,20 +15,18 @@ export default {
         //     type: String,
         //     default: ''
         // },
-        todoTitle:{
+        todoTitle: {
             type: String,
-            default: ''
+            default: ""
         }
     },
     methods: {
-        onInputChange(e){
+        onInputChange(e) {
             // this.$emit("update:modelValue",e.target.value)
-            this.$emit("update:todoTitle",e.target.value)
+            this.$emit("update:todoTitle", e.target.value);
         }
     }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -5,32 +5,32 @@ const filters = {
         return todos;
     },
     active(todos) {
-        return todos.filter((todo) => !todo.completed);
+        return todos.filter(todo => !todo.completed);
     },
     completed(todos) {
-        return todos.filter((todo) => todo.completed);
-    },
+        return todos.filter(todo => todo.completed);
+    }
 };
 export function useFilter(todos) {
     const filterState = reactive({
         filterItems: [
             {
                 label: "All",
-                value: "all",
+                value: "all"
             },
             {
                 label: "Active",
-                value: "active",
+                value: "active"
             },
             {
                 label: "Completed",
-                value: "completed",
-            },
+                value: "completed"
+            }
         ],
         visibility: "all",
         filterdTodos: computed(() => {
             return filters[filterState.visibility](todos.value);
-        }),
+        })
     });
-    return filterState
+    return filterState;
 }

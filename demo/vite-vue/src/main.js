@@ -1,24 +1,25 @@
-import { createApp } from 'vue'
+import { createApp } from "vue";
 // import { createRenderer } from '@vue/runtime-core'
 
-import App from './App.vue'
-import './index.css'
+import App from "./App.vue";
+import "./index.css";
 // import CanvasApp from './CanvasApp.vue'
 
-import EditTodo from './components/todos/EditTodo.vue'
-import router from './router/router.js'
-import store from './store/store'
+import EditTodo from "./components/todos/EditTodo.vue";
+import router from "./router/router.js";
+import store from "./store/store";
 
 createApp(App)
-  .directive('highlight', {
-    beforeMount(el, binding, vnode) {
-      el.style.background = binding.value
-    }
-  })
-  .component('EditTodo', EditTodo)
-  .use(router)
-  .use(store)
-  .mount("#app")
+    .directive("highlight", {
+        beforeMount(el, binding, vnode) {
+            console.log("vnode", vnode);
+            el.style.background = binding.value;
+        }
+    })
+    .component("EditTodo", EditTodo)
+    .use(router)
+    .use(store)
+    .mount("#app");
 
 // const nodeOps = {
 //   insert: (child, parent, anchor) => {
