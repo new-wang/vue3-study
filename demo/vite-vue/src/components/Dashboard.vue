@@ -11,6 +11,11 @@
         <!-- toRefs -->
         <p :class="$style['click-count']" @click="add">{{ count }}</p>
 
+        <!-- testworld -->
+        <test-world msg="test-world"></test-world>
+    
+        <Comps></Comps>
+
         <ul>
             <li>
                 <!-- <router-link to = "/" >dashboard</router-link> -->
@@ -32,9 +37,15 @@
 import { toRefs } from "@vue/reactivity";
 import { useStore } from "vuex";
 import NavLink from "./NavLink.vue";
+import TestWorld from "./testWorld.vue";
+
+import Comps from "./Comps.vue";
+
 export default {
     components: {
-        NavLink
+        NavLink,
+        TestWorld,
+        Comps
     },
     setup() {
         const store = useStore();
